@@ -26,21 +26,19 @@ public class DemoLogInTest {
     }
 
 
-    @Test(priority = 0)
+    @Test(priority = 0, suiteName = "GoogleDemo")
     public void validateLoginGoogle() {
         page.loginGoogle(Helper.email,Helper.password);
         Assert.assertEquals("Google", driver.getTitle());
     }
 
-    @Test(priority = 1)
+    @Test(priority = 1, suiteName = "GoogleDemo")
     public void search() {
         page.search("youtube");
         Assert.assertEquals("Google - YouTube", driver.getTitle());
 
 
     }
-
-
 
     @AfterSuite
     public void close(){
