@@ -2,6 +2,7 @@ package Page;
 
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.ExpectedConditions;
@@ -36,6 +37,10 @@ public class DemoPage {
     WebElement searchBox;
     @FindBy(xpath = "//div[@class=\"yuRUbf\"]//a[@href=\"https://www.youtube.com/user/Google?hl=es\"]")
     WebElement youtubeLink;
+    @FindBy(xpath = "//div[@class=\"ANuIbb\"]")
+    WebElement div;
+    @FindBy(xpath ="//a[@href=\"https://accounts.google.com/SignOutOptions?hl=es&continue=https://www.google.com/\"]" )
+    WebElement account;
 
     public void OpenBrowser(String url) {
         driver.get(url);
@@ -44,14 +49,16 @@ public class DemoPage {
     }
 
     public void loginGoogle(String email, String password) {
-
         logInButton.click();
         emailField.sendKeys(email);
         nextButton.click();
-       waitUntilVisibilityOf(passwordField);
+        waitUntilVisibilityOf(passwordField);
         passwordField.sendKeys(password);
-        waitUntilVisibilityOf(passwordNext);
-        passwordNext.click();
+        Actions action= new Actions(driver);
+       // if (passwordNext.isEnabled())
+        action.moveToElement(passwordNext).click().perform();
+        waitUntilVisibilityOf(account);
+
 
     }
 
@@ -64,8 +71,13 @@ public class DemoPage {
     }
 
 
-    public void waitUntilVisibilityOf(WebElement element){
+    public void waitUntilVisibilityOf(WebElement element) {
         WebDriverWait wait = new WebDriverWait(driver, 15);
         wait.until(ExpectedConditions.visibilityOf(element));
+    }
+
+    public void waitUntilInvisibilityOf(WebElement element) {
+      // WebDriverWait wait = new WebDriverWait(driver, 1);
+        //wait.until(ExpectedConditions.invisibilityOf(element));
     }
 }
