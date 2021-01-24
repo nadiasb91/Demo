@@ -24,7 +24,9 @@ public class DemoPage {
     }
 
     public void search(String text){
+        driver.manage().window().fullscreen();
         searchBox.sendKeys(text);
         searchBox.submit();
+
     }
 }
