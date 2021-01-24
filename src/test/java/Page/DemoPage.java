@@ -39,7 +39,7 @@ public class DemoPage {
     WebElement youtubeLink;
     @FindBy(xpath = "//div[@class=\"ANuIbb\"]")
     WebElement div;
-    @FindBy(xpath ="//a[@href=\"https://accounts.google.com/SignOutOptions?hl=es&continue=https://www.google.com/\"]" )
+    @FindBy(xpath = "//a[@href=\"https://accounts.google.com/SignOutOptions?hl=es&continue=https://www.google.com/\"]")
     WebElement account;
 
     public void OpenBrowser(String url) {
@@ -54,14 +54,13 @@ public class DemoPage {
         nextButton.click();
         waitUntilVisibilityOf(passwordField);
         passwordField.sendKeys(password);
-        Actions action= new Actions(driver);
-       // if (passwordNext.isEnabled())
-        action.moveToElement(passwordNext).click().perform();
+        Actions action = new Actions(driver);
+        if (passwordNext.isEnabled())
+            action.moveToElement(passwordNext).click().perform();
         waitUntilVisibilityOf(account);
 
 
     }
-
 
     public void search(String criteria) {
         searchBox.sendKeys(criteria);
@@ -76,8 +75,8 @@ public class DemoPage {
         wait.until(ExpectedConditions.visibilityOf(element));
     }
 
-    public void waitUntilInvisibilityOf(WebElement element) {
-      // WebDriverWait wait = new WebDriverWait(driver, 1);
-        //wait.until(ExpectedConditions.invisibilityOf(element));
-    }
+    // public void waitUntilInvisibilityOf(WebElement element) {
+    // WebDriverWait wait = new WebDriverWait(driver, 1);
+    //wait.until(ExpectedConditions.invisibilityOf(element));
+//}
 }
