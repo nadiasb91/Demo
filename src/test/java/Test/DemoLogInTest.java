@@ -6,6 +6,7 @@ import io.github.bonigarcia.wdm.WebDriverManager;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
+import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
 import org.testng.annotations.*;
 
@@ -28,15 +29,18 @@ public class DemoLogInTest {
     }
 
 
-    @Test(priority = 0)
+    @Test(priority = 0, enabled = false)
     public void validateLoginGoogle() {
-     page.loginGoogle("lola.perez910607@gmail.com","nbatista123");
+        page.loginGoogle("lola.perez910607@gmail.com", "nbatista123");
+        Assert.assertEquals("youtube - Buscar con Google", driver.getTitle());
     }
 
     @Test(priority = 1)
-    public void search(){
+    public void search() {
         page.search("youtube");
-        Assert.assertEquals("youtube - Buscar con Google", driver.getTitle());
+        Assert.assertEquals("Google - YouTube", driver.getTitle());
+
+
     }
 
 

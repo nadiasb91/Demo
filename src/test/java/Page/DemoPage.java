@@ -15,10 +15,12 @@ public class DemoPage {
 
     WebDriver driver;
 
+
     public DemoPage(WebDriver driver) {
         this.driver = driver;
         PageFactory.initElements(driver, this);
     }
+
 
     @FindBy(id = "gb_70")
     WebElement logInButton;
@@ -32,42 +34,38 @@ public class DemoPage {
     WebElement passwordNext;
     @FindBy(name = "q")
     WebElement searchBox;
-
-
-
+    @FindBy(xpath = "//div[@class=\"yuRUbf\"]//a[@href=\"https://www.youtube.com/user/Google?hl=es\"]")
+    WebElement youtubeLink;
 
     public void OpenBrowser(String url) {
         driver.get(url);
-      //  driver.manage().window().fullscreen();
+        //  driver.manage().window().fullscreen();
 
     }
 
-    public void loginGoogle(String email, String password){
-       logInButton.click();
-       emailField.sendKeys(email);
-       nextButton.click();
-       this.waitUntilVisibilityOf(passwordField);
-       passwordField.sendKeys(password);
-       waitUntilVisibilityOf(passwordNext);
-       passwordNext.click();
+    public void loginGoogle(String email, String password) {
+
+        logInButton.click();
+        emailField.sendKeys(email);
+        nextButton.click();
+       waitUntilVisibilityOf(passwordField);
+        passwordField.sendKeys(password);
+        waitUntilVisibilityOf(passwordNext);
+        passwordNext.click();
 
     }
 
 
-    public void search(String criteria){
+    public void search(String criteria) {
         searchBox.sendKeys(criteria);
         searchBox.submit();
+        waitUntilVisibilityOf(youtubeLink);
+        youtubeLink.click();
     }
 
 
-
-    public void waitUntilVisibilityOf(WebElement element) {
+    public void waitUntilVisibilityOf(WebElement element){
         WebDriverWait wait = new WebDriverWait(driver, 15);
         wait.until(ExpectedConditions.visibilityOf(element));
     }
-    public void waitUntilElementIsClickable(WebElement element) {
-        WebDriverWait wait = new WebDriverWait(driver, 15);
-        wait.until(ExpectedConditions.elementToBeClickable(element));
-    }
-
 }
