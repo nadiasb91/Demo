@@ -36,6 +36,7 @@ public class DemoLogInTest {
     @Test(priority = 1)
     public void search(){
         page.search("youtube");
+        Assert.assertEquals("youtube - Buscar con Google", driver.getTitle());
     }
 
 
