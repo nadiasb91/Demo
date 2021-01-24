@@ -12,7 +12,7 @@ import org.testng.annotations.*;
 import java.util.concurrent.TimeUnit;
 
 
-public class DemoTest {
+public class DemoLogInTest {
 
     WebDriver driver;
     DemoPage page;
@@ -22,19 +22,23 @@ public class DemoTest {
         WebDriverManager.firefoxdriver().setup();
         //WebDriverManager.getInstance(DriverManagerType.CHROME).setup();
         driver = new FirefoxDriver();
-        page= new DemoPage(driver);
+        page = new DemoPage(driver);
         page.OpenBrowser("https://google.com");
+
     }
 
-    @Test
-    public void validateTitle() {
-        Assert.assertEquals("Google",driver.getTitle());
+
+    @Test(priority = 0)
+    public void validateLoginGoogle() {
+     page.loginGoogle("lola.perez910607@gmail.com","nbatista123");
     }
 
-    @Test
+    @Test(priority = 1)
     public void search(){
-        page.search("selenium");
+        page.search("youtube");
     }
+
+
 
    /* @AfterSuite
     public void close(){
